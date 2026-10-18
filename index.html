@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lovely 💗</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--pink:#ff628d;--soft:#ffe5ed;--deep:#d94f79}
+body{font-family:"Trebuchet MS",Arial,sans-serif;min-height:100vh;overflow:hidden;background:#ffe3eb;color:#8f5367}
+.scene{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,#fff5f8 0%,#ffe6ed 48%,#ffd4e0 100%);transition:background 1s}
+.scene::before{content:"";position:absolute;inset:0;opacity:.6;background-image:radial-gradient(#ff8bac 1px,transparent 1.5px),radial-gradient(#ffb2c6 1px,transparent 1.5px);background-size:47px 53px,71px 67px;background-position:0 0,23px 18px;pointer-events:none}
+#petals{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.petal{position:absolute;top:-20px;color:#ff8baa;opacity:.8;animation:fall linear infinite;filter:drop-shadow(0 2px 2px #f8b4c8)}
+@keyframes fall{to{transform:translate3d(var(--drift),110vh,0) rotate(600deg);opacity:.1}}
+.panel{position:relative;z-index:2;background:rgba(255,255,255,.83);border:1px solid rgba(255,255,255,.95);border-radius:22px;box-shadow:0 15px 45px #e78ca633,0 3px 10px #e78ca61c;backdrop-filter:blur(9px)}
+.pass-panel{width:min(280px,88vw);padding:25px 22px 22px;text-align:center;animation:pop .7s both}
+h1{font-size:20px;color:#f05d86;line-height:1.4;margin-bottom:13px}
+.dots{height:18px;letter-spacing:7px;color:#ff6f97;font-size:18px;margin-bottom:15px}
+.keys{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.key{height:39px;border:1px solid #f8dce5;border-radius:10px;background:#fff;color:#9e7482;font-size:14px;box-shadow:0 2px 5px #edb9ca2b;cursor:pointer;transition:.18s}
+.key:hover{background:#ffe9f0;transform:translateY(-2px)}
+.key:active{transform:scale(.94)}
+.key.special{color:#e44f78;font-weight:bold}
+.hint{font-size:11px;color:#c58a9c;margin-top:12px;min-height:14px}
+button{font-family:inherit}
+.music{position:fixed;z-index:5;left:20px;bottom:18px;border:0;border-radius:30px;padding:13px 22px;background:#fff0f5;color:#9a6578;box-shadow:0 4px 14px #e7a0b333;cursor:pointer;font-weight:bold;font-size:12px}
+.main{display:none;position:relative;z-index:2;text-align:center;width:100%;height:100%;align-items:center;justify-content:center;flex-direction:column}
+.bouquet{font-size:clamp(120px,22vw,220px);line-height:1.1;filter:drop-shadow(0 12px 12px #d77a9830);animation:sway 3s ease-in-out infinite;cursor:pointer;user-select:none}
+@keyframes sway{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(3deg) translateY(-9px)}}
+.caption{font-size:12px;color:#b8798e;margin-top:22px}
+.caption span{display:inline-block;animation:beat 1.2s infinite}
+@keyframes beat{50%{transform:scale(1.25)}}
+.letter{display:none;width:min(390px,88vw);padding:27px 24px 22px;text-align:left;animation:pop .65s both}
+.letter h2{font-size:21px;color:#ef5c83;margin-bottom:17px;line-height:1.4}
+.letter p{font-size:13px;line-height:1.9;color:#916b79;min-height:72px;white-space:pre-wrap}.letter p::after{content:"";display:inline-block;width:2px;height:1em;background:#ef5c83;margin-left:3px;vertical-align:middle;animation:blink .7s steps(1) infinite}@keyframes blink{50%{opacity:0}}
+.pill{display:block;margin:22px auto 0;border:0;border-radius:30px;padding:10px 30px;background:linear-gradient(135deg,#ff83a5,#f45480);color:white;font-weight:bold;box-shadow:0 5px 13px #ed668b44;cursor:pointer}
+.stickers{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.sticker{position:absolute;font-size:clamp(28px,5vw,48px);background:#fff9fb;border-radius:9px;padding:7px;box-shadow:0 5px 15px #b96b8528;animation:float 5s ease-in-out infinite}
+.sticker:nth-child(1){left:9%;top:27%;transform:rotate(-12deg)}
+.sticker:nth-child(2){right:9%;top:34%;transform:rotate(12deg);animation-delay:-2s}
+.sticker:nth-child(3){left:14%;bottom:12%;transform:rotate(8deg);animation-delay:-1s}
+.sticker:nth-child(4){right:16%;bottom:15%;transform:rotate(-8deg);animation-delay:-3s}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -18px}}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+.shake{animation:shake .35s}
+@keyframes shake{25%,75%{transform:translateX(-5px)}50%{transform:translateX(5px)}}
+@media(max-width:500px){.letter{padding:23px 21px}.letter h2{font-size:19px}.music{left:12px;bottom:12px}}
+</style>
+</head>
+<body>
+<div class="scene" id="scene">
+  <div id="petals"></div>
+  <section class="panel pass-panel" id="passPanel">
+    <h1>Nhập pass nha</h1>
+    <div class="dots" id="dots">○ ○ ○ ○</div>
+    <div class="keys">
+      <button class="key" data-num="1">1</button><button class="key" data-num="2">2</button><button class="key" data-num="3">3</button>
+      <button class="key" data-num="4">4</button><button class="key" data-num="5">5</button><button class="key" data-num="6">6</button>
+      <button class="key" data-num="7">7</button><button class="key" data-num="8">8</button><button class="key" data-num="9">9</button>
+      <button class="key" data-num="0" style="grid-column:2">0</button><button class="key special" id="clear">✕</button>
+    </div>
+    <div class="hint" id="hint">Thân gửi: Tập thể nữ 11B1 💗</div>
+  </section>
+  <main class="main" id="main">
+    <div class="stickers" id="stickers" style="display:none">
+      <div class="sticker">🐰💗</div><div class="sticker">🎀🐱</div><div class="sticker">💌🐰</div><div class="sticker">🌸✨</div>
+    </div>
+    <div class="bouquet" id="bouquet" aria-label="Bó hoa">💐</div>
+    <div class="caption" id="caption">Chọn vào bó hoa nhé <span>🌷</span></div>
+  </main>
+  <section class="panel letter" id="letter">
+    <h2>Gửi các bạn nữ trong tập thể 11B1💗 </h2>
+    <p id="letterText"></p>
+    <button class="pill" id="closeLetter">Đóng</button>
+  </section>
+  <button class="music" id="music">Play Music</button>
+</div>
+<audio id="song" src="nhac.mp4" loop preload="auto" autoplay playsinline></audio>
+<script>
+const passPanel=document.getElementById('passPanel'),dots=document.getElementById('dots'),hint=document.getElementById('hint');
+const main=document.getElementById('main'),letter=document.getElementById('letter'),bouquet=document.getElementById('bouquet');
+const stickers=document.getElementById('stickers'),caption=document.getElementById('caption'),scene=document.getElementById('scene');
+let code='';
+/* Nội dung thư sẽ hiện từng chữ một */
+const letterContent='Chúc các bạn nữ trong tập thể 11B1 20/10 thật hạnh phúc nhé! Mong rằng mỗi ngày trôi qua các bạn đều có thêm nhiều niềm vui, luôn được yêu thương và mỉm cười thật nhiều. Chúc các bạn luôn xinh xắn, dịu dàng và gặp thật nhiều điều tốt đẹp. 💗';
+let typingTimer=null;
+const PASSWORD='1570';
+function updateDots(){dots.textContent=(code+'○○○○').slice(0,4).split('').join(' ')}
+document.querySelectorAll('[data-num]').forEach(btn=>btn.addEventListener('click',()=>{
+  if(code.length>=4)return;
+  code+=btn.dataset.num;updateDots();
+  if(code.length===4){
+    if(code===PASSWORD){
+      passPanel.style.display='none';main.style.display='flex';
+      hint.textContent='';
+    }else{
+      hint.textContent='Sai pass rồi, thử lại nha 💗';
+      passPanel.classList.remove('shake');void passPanel.offsetWidth;passPanel.classList.add('shake');
+      setTimeout(()=>{code='';updateDots()},650);
+    }
+  }
+}));
+document.getElementById('clear').addEventListener('click',()=>{code='';updateDots();hint.textContent='Gợi ý: ngày đặc biệt 💗'});
+bouquet.addEventListener('click',()=>{
+  main.style.display='none';letter.style.display='block';
+  scene.style.background='radial-gradient(ellipse at center,#e8c5d0 0%,#d2a0b0 100%)';
+  const letterText=document.getElementById('letterText');
+  letterText.textContent='';
+  let i=0;
+  if(typingTimer)clearInterval(typingTimer);
+  typingTimer=setInterval(()=>{
+    letterText.textContent+=letterContent.charAt(i);
+    i++;
+    if(i>=letterContent.length)clearInterval(typingTimer);
+  },55);
+});
+document.getElementById('closeLetter').addEventListener('click',()=>{
+  letter.style.display='none';main.style.display='flex';stickers.style.display='block';
+  caption.textContent='Gửi các bạn nữ trong tập thể 11B1 thật nhiều yêu thương 💗';
+  scene.style.background='radial-gradient(ellipse at center,#fff5f8 0%,#ffe6ed 48%,#ffd4e0 100%)';
+});
+/* Hoa và cánh hoa rơi trang trí */
+const petalBox=document.getElementById('petals');
+for(let i=0;i<34;i++){
+  const el=document.createElement('span');el.className='petal';
+  el.textContent=['✿','❀','♥','🌸'][i%4];
+  el.style.left=Math.random()*100+'%';el.style.fontSize=(8+Math.random()*13)+'px';
+  el.style.animationDuration=(7+Math.random()*12)+'s';el.style.animationDelay=(-Math.random()*18)+'s';
+  el.style.setProperty('--drift',(Math.random()*150-75)+'px');petalBox.appendChild(el);
+}
+/* Tự phát nhạc khi mở trang; một số trình duyệt chặn autoplay có tiếng.
+   Nếu bị chặn, lần chạm/click đầu tiên trên trang sẽ bắt đầu phát nhạc. */
+const song=document.getElementById('song'),music=document.getElementById('music');
+async function startMusic(){
+  try{
+    await song.play();
+    music.textContent='Pause Music';
+  }catch(e){
+    music.textContent='Play Music';
+  }
+}
+window.addEventListener('load',startMusic);
+document.addEventListener('pointerdown',()=>{
+  if(song.paused)startMusic();
+},{once:true});
+music.addEventListener('click',async()=>{
+  if(song.paused){await startMusic();}
+  else{song.pause();music.textContent='Play Music';}
+});
+</script>
+</body>
+</html>
